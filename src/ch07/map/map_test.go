@@ -11,8 +11,13 @@ func TestInitMap(t *testing.T) {
 	m2[4] = 16
 	t.Logf("len m2=%d", len(m2))
 
-	m3 := make(map[int]int, 10)
+	m3 := make(map[int]int, 3)
 	t.Logf("Len m3=%d", len(m3))
+	m3[0] = 0
+	m3[1] = 1
+	m3[2] = 2
+	m3[3] = 3
+	t.Log(m3, len(m3))
 }
 
 func TestAccessNotExistingKey(t *testing.T) {
