@@ -11,10 +11,10 @@ func returnMultiValues() (int, int) {
 	return rand.Intn(10), rand.Intn(20)
 }
 
-func timeSpent(inner func(op int) func(op int)) int {
-	return inner(n int) {
+func timeSpent(inner func(op int) int) func(op int) int {
+	return func(op int) int {
 		start := time.Now()
-		ret := inner(n)
+		ret := inner(op)
 		fmt.Println("time spent:", time.Since(start).Seconds())
 		return ret
 	}
@@ -28,6 +28,33 @@ func slowFun(op int) int {
 func TestFn(t *testing.T) {
 	a, _ := returnMultiValues()
 	t.Log(a)
-	tsFn := timeSpent(slowFun)
-	t.Log(tsFn)
+	tsSF := timeSpent(slowFun)
+	t.Log(tsSF(10))
+}
+
+func Sum(ops ...int) int  {
+	ret := 0
+	for _, op := range ops{
+		ret += op
+	}
+	return ret
+}
+
+func TestVarParam(t *testing.T) {
+	t.Log(Sum(1, 2, 3))
+	t.Log(Sum(1, 3, 5, 7, 9))
+}
+
+func Clear()  {
+	fmt.Println("Clear resources")
+}
+
+func TestDefer(t *testing.T)  {
+	//defer Clear()
+	defer func() {
+		fmt.Println("Clear resources")
+	}()
+	fmt.Println("Start")
+	panic("error")
+	fmt.Println("End")
 }
