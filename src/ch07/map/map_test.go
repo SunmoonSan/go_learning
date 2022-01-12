@@ -26,7 +26,7 @@ func TestAccessNotExistingKey(t *testing.T) {
 	m1[2] = 0
 	t.Log(m1[2])
 	m1[3] = 0
-	if v, ok := m1[3]; ok {
+	if v, ok := m1[4]; ok {
 		t.Log(v)
 	} else {
 		t.Log("不存在...")
@@ -34,7 +34,7 @@ func TestAccessNotExistingKey(t *testing.T) {
 }
 
 func TestTravelMap(t *testing.T) {
-	m1 := map[int]int{1: 1, 2: 4, 3: 9}
+	m1 := map[int]int{1: 1, 4: 4, 3: 9}
 	for k, v := range m1 {
 		t.Log(k, v)
 	}
